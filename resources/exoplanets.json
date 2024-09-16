@@ -28701,7 +28701,7 @@
   },
   {
     "Name": "2MASS J1119-1137",
-    "Mass (MJ)": "10-May",
+    "Mass (MJ)": "10",
     "Radius (RJ)": "",
     "Period (days)": 32872.5,
     "Semi-major axis (AU)": 3.6,
@@ -69172,7 +69172,7 @@
     "Disc. Year": "",
     "Distance (ly)": 4.37,
     "Host star mass (M☉)": "",
-    "Host star temp. (K)": "Imaged near Alpha Centauri A",
+    "Host star temp. (K)": "",
     "Remarks": "HD 13808 b"
   },
   {
