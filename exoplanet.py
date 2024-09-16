@@ -20,9 +20,15 @@ class ExoplanetDataFrame:
         for k in listOfDictionaryData[0].keys():
             self.dictOfColumns.update({k:[]})
 
-        for dict in listOfDictionaryData:
+        for dict in listOfDictionaryData:        
             for k,v in dict.items():
-               self.dictOfColumns.get(k).append(v)
+               val = v
+               if (k != 'Name' and k != 'Discovery method' and k != 'Remarks') and isinstance(v,str):
+                    val = None
+               self.dictOfColumns.get(k).append(val)
+        
+   
+        
 
 
     def strPercentageNullDict(self):
@@ -49,8 +55,8 @@ class ExoplanetDataFrame:
 
         newlist = [x for x in list if x is not None]
 
-        for v in newlist:
-            if isinstance(v, str): print(v)
+        for i in range(0, len(list)):
+            if isinstance(list[i], str): print(list[i] + "  "+ i.__str__())
 
         emptyElementValue = 0
         if mode == "average":

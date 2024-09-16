@@ -42,7 +42,7 @@ class MyParser:
         if openbreacketIndex != -1:
             propertyName = key[:openbreacketIndex]
         else: propertyName = key
-        return propertyName
+        return propertyName.strip(' ').strip('.')
 
 
     def __transformValue(self, text: str) -> float:  

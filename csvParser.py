@@ -19,7 +19,7 @@ class CsvParser:
 
      def __parse(self):
           #create list of dictioanries from text         
-          splitedText = self._text.split('\n')
+          splitedText = self._text.strip('\n').split('\n')
 
           for headElem in splitedText[0].split(','):
                 self._header.append(headElem)
