@@ -20,21 +20,23 @@ def showLinear(df:pd.DataFrame, len:int, firstColumnName: str, secondColumnName:
     plt.show()
 
 def fillInEmpty(exoplanetDF:ExoplanetDataFrame):
-    exoplanetDF.fillInEmptyValues('median')
+    exoplanetDF.fillInEmptyValues('median') #fill empty values 
     print(exoplanetDF.strPercentageNullDict())
 
-data = MyParser(os.getcwd() + "\\resources\\exoplanets.csv")
-exoplanetDataFrame = ExoplanetDataFrame()
-exoplanetDataFrame.fromDict(data.standardDict)
-print(exoplanetDataFrame.strPercentageNullDict())
-#fillInEmpty(exoplanetDataFrame)
+data = MyParser(os.getcwd() + "\\resources\\exoplanets.csv") #Parse csv or json file. we get list of dictionaries such [{:,:},{:,:}] 
+exoplanetDataFrame = ExoplanetDataFrame() #create special DataFrame for exoplanet dataset
+exoplanetDataFrame.fromDict(data.standardDict) # fill DataFrame from dictionary
+print(exoplanetDataFrame.strPercentageNullDict()) # get percent of none value for each column
+#fillInEmpty(exoplanetDataFrame) #fill None values
 
 
-df = pd.DataFrame(data=exoplanetDataFrame.dictOfColumns)
-df1= df[['Mass', 'Radius', 'Period', 'Semi-major axis', 'Temp', 'Distance', 'Host star mass', 'Host star temp']]
+df = pd.DataFrame(data=exoplanetDataFrame.dictOfColumns) # create pandas DataFrame from exoplanet DataFrame. 
+#ToDo try to show charts without pandas DataFrame
 
-showPairPlot(df1[['Mass', 'Radius', 'Period', 'Temp', 'Host star mass', 'Host star temp']],400)
+df1= df[['Mass', 'Radius', 'Period', 'Semi-major axis', 'Temp', 'Distance', 'Host star mass', 'Host star temp']] #select only numerical data columns
 
-#showHistogramm(df,500,'Mass')
+showPairPlot(df1[['Mass', 'Radius', 'Period', 'Temp', 'Host star mass', 'Host star temp']],400) #Show pair plots
 
-#showLinear(df,  500, 'Mass', 'Radius')
+#showHistogramm(df,500,'Mass') #Show Histogram for mass parameter
+
+#showLinear(df,  500, 'Mass', 'Radius') #Show Linear dependency for Mass and Radius
