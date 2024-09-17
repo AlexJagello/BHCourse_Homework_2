@@ -4,42 +4,45 @@ from turtle import update
 from typing import Dict
 
 class ExoplanetDataFrame:
+    #Data frame class. created for exoplanet dataset
     def __init__(self):
         self.dictOfColumns = {} #{"name": [data]}
         self.percentageNullDict = {} #{"name": null values in percent}
 
-
+    
     def percentageOfNullValues(self) -> Dict[str,float]:
+        #counts none values ​​as a percentage
         for k, v in self.dictOfColumns.items():
             nullPercent = sum(x is None or x=="" or x==" " for x in v) / v.__len__()
             self.percentageNullDict.update({k : nullPercent})    
         return self.percentageNullDict        
 
-
-    def fromDict(self, listOfDictionaryData):
+    
+    def fromDict(self, listOfDictionaryData):        
+        #transform list of dicts to dataFrame
         for k in listOfDictionaryData[0].keys():
             self.dictOfColumns.update({k:[]})
 
         for dict in listOfDictionaryData:        
             for k,v in dict.items():
                val = v
-               if (k != 'Name' and k != 'Discovery method' and k != 'Remarks') and isinstance(v,str):
+               #ToDo change this string. Now it is one place which related to current data set 
+               if (k != 'Name' and k != 'Discovery method' and k != 'Remarks') and isinstance(v,str): 
                     val = None
                self.dictOfColumns.get(k).append(val)
         
    
-        
-
-
     def strPercentageNullDict(self):
+        #prints a string representation of the percentage empty values ​​for each column
         self.percentageOfNullValues()
         string = ""
         for k,v in self.percentageNullDict.items():
             string += k.__str__() + " : " + round((v*100)).__str__() + '% empty data\n'
         return string
 
-
+    
     def fillInEmptyValues(self, mode:str):
+          #fill none values by mode: median or average
           newDict = {} #{"name": [data float]}
           for k,v in self.dictOfColumns.items():
               if isinstance(v[3],str) == False:
@@ -80,7 +83,7 @@ class ExoplanetDataFrame:
             return sortedList[midx]
 
 
-
+#dont use
 class Exoplanet:
     def __init__(self):
         self.name = None
